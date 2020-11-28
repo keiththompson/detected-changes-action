@@ -1,0 +1,15 @@
+{
+  "name": "detected-changes-action",
+  "version": "1.0.0",
+  "description": "A job that generates a build matrix based on files changed",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0"
+  }
+}

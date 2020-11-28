@@ -1,0 +1,18 @@
+on: [push]
+
+jobs:
+  generate_build_matrix:
+    runs-on: ubuntu-latest
+    name: Generate build matrix. 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Generate Build Matrix
+        uses: ./
+        id: generate_build_matrix
+        with:
+          repo-token: ${{ secrets.MY_GITHUB_TOKEN }}
+      - name: Print the output
+        run: |
+          echo "The build matrix is ${{ steps.generate_build_matrix.outputs.build_matrix }}"
+          echo "Build matrix empty: ${{ steps.generate_build_matrix.outputs.is_empty }}"
