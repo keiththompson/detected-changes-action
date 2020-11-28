@@ -1,0 +1,21 @@
+name: 'Generate build matrix'
+description: 'A job that generates a build matrix based on files changed'
+inputs:
+  repo-token:
+    description: 'The github token used to authenticate'
+    required: true
+  depth:
+    description: 'How many levels deep should the directories be returned'
+    required: true
+    default: 2
+  target-directory:
+    description: 'An optional target directory to listen to changes in'
+    required: false
+outputs:
+  build_matrix:
+    description: 'The files changed between the default branch and the sha being built'
+  is_empty:
+    description: 'Returns true when the build matrix is empty'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
