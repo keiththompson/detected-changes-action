@@ -1,0 +1,17 @@
+on: [push]
+
+jobs:
+  detect_changes_job:
+    runs-on: ubuntu-latest
+    name: A job that prints diffs
+    steps:
+      # To use this repository's private action,
+      # you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Hello world action step
+        uses: ./ # Uses an action in the root directory
+        id: hit_the_diff
+      # Use the output from the `hello` step
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hit_the_diff.outputs.diff }}"
