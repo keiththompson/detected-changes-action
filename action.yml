@@ -1,0 +1,13 @@
+name: 'Detected Changes'
+description: 'A Github action that returns a list of directories that have been modified.'
+# inputs:
+#   who-to-greet:  # id of input
+#     description: 'Who to greet'
+#     required: true
+#     default: 'World'
+outputs:
+  diff: # id of output
+    description: 'The diff beween base and the sha being built'
+runs:
+  using: 'node12'
+  main: 'index.js
