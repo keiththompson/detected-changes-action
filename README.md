@@ -30,10 +30,10 @@ Returns true if the build matrix is empty.
 
 ```yaml
 name: Generate Build Matrix
-        uses: keiththompson/detected-changes-action@x.x.x
-        id: generate_build_matrix
-        with:
-          repo-token: ${{ secrets.MY_GITHUB_TOKEN }}
-          target-directory: projects
-          depth: 3
+uses: keiththompson/detected-changes-action@x.x.x
+id: generate_build_matrix
+with:
+  repo-token: ${{ secrets.MY_GITHUB_TOKEN }}
+  target-directory: projects
+  depth: 3
 ```
