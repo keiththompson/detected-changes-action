@@ -13,9 +13,12 @@ try {
     const owner = context['repository']['owner']['name'];
     const repo = context['repository']['name'];
     const base = context['repository']['default_branch'];
-    console.log(`ref: ${context['ref']}`)
-    const head = context['ref'].replace("refs/heads/", "");
-    
+    var head;
+    if (github.context.eventName === 'pull_request') {
+        head = context['pull_request']['base']['ref'];
+    } else {
+        head = context['ref'].replace("refs/heads/", "");
+    }
     const token = core.getInput('repo-token');
     const octokit = github.getOctokit(token);
     const depth = core.getInput('depth');
