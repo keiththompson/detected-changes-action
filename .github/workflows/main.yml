@@ -1,17 +1,18 @@
 on: [push]
 
 jobs:
-  detect_changes_job:
+  generate_build_matrix:
     runs-on: ubuntu-latest
-    name: A job that prints diffs
+    name: Generate build matrix. 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Hello world action step
+      - name: Generate Build Matrix
         uses: ./
-        id: hit_the_diff
+        id: generate_build_matrix
         with:
           repo-token: ${{ secrets.MY_GITHUB_TOKEN }}
-      # Use the output from the `hello` step
-      - name: Get the output
-        run: echo "The output was ${{ steps.hit_the_diff.outputs.files_changed }}"
+      - name: Print the output
+        run: |
+          echo "The build matrix is ${{ steps.generate_build_matrix.outputs.build_matrix }}"
+          echo "Build matrix empty: ${{ steps.generate_build_matrix.outputs.is_empty }}"

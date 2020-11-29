@@ -1,7 +1,7 @@
 {
   "name": "detected-changes-action",
   "version": "1.0.0",
-  "description": "A Github action that returns a list of directories that have been modified.",
+  "description": "A job that generates a build matrix based on files changed",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
