@@ -4,7 +4,7 @@
   "description": "A job that generates a build matrix based on files changed",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "ncc build index.js --license LICENSE"
   },
   "author": "",
   "license": "MIT",

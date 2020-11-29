@@ -6,6 +6,7 @@ try {
     const owner = context['repository']['owner']['name'];
     const repo = context['repository']['name'];
     const base = context['repository']['default_branch'];
+    console.log(`ref: ${context['ref']}`)
     const head = context['ref'].replace("refs/heads/", "");
     
     const token = core.getInput('repo-token');
