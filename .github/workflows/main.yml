@@ -5,13 +5,13 @@ jobs:
     runs-on: ubuntu-latest
     name: A job that prints diffs
     steps:
-      # To use this repository's private action,
-      # you must check out the repository
       - name: Checkout
         uses: actions/checkout@v2
       - name: Hello world action step
-        uses: ./ # Uses an action in the root directory
+        uses: ./
         id: hit_the_diff
+        with:
+          repo-token: ${{ secrets.MY_GITHUB_TOKEN }}
       # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hit_the_diff.outputs.diff }}"
+      - name: Get the output
+        run: echo "The output was ${{ steps.hit_the_diff.outputs.files_changed }}"
