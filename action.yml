@@ -1,5 +1,8 @@
 name: 'Generate build matrix'
 description: 'A job that generates a build matrix based on files changed'
+branding:
+  icon: 'folder-plus'  
+  color: 'purple'
 inputs:
   repo-token:
     description: 'The github token used to authenticate'
