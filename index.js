@@ -64,9 +64,9 @@ function parseDirectories(file, depth, targetDirectory) {
 }
 
 function buildMatrix(changedDirectories) {
-    include = [];
-    var directory;
-    for (directory of changedDirectories) {
+    let directories = [...new Set(changedDirectories)];
+    let include = []
+    for (directory of directories) {
         include.push({'directory': directory});
     }
     return {'include': include};
