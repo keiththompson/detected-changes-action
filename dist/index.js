@@ -7,7 +7,7 @@ module.exports =
 
 const core = __webpack_require__(127);
 const github = __webpack_require__(134);
-const readdirSync = __webpack_require__(747)
+const fs = __webpack_require__(747)
 
 try { 
     const context = github.context.payload;
@@ -23,24 +23,17 @@ try {
     const token = core.getInput('repo-token');
     const octokit = github.getOctokit(token);
     const depth = core.getInput('depth');
+    const buildAll = core.getInput('build-all');
     const targetDirectory = core.getInput('target-directory')
     if (targetDirectory && depth == 1) {
         depth = 2;
     }
-    var labels;
-    if (github.context.eventName === 'pull_request') {
-        labels = context['pull_request']['labels'];
-    } else {
-        labels = [];
-    }
 
-    if (shouldBuildAll(labels)) {
-        const directories = targetDirectory => readdirSync(targetDirectory, { withFileTypes: true })
-        .filter(dirent => dirent.isDirectory())
-        .map(dirent => dirent.name)
+    if (buildAll) {
+        const directories = getDirectories(targetDirectory)
         const result = buildMatrix(directories)
-            core.setOutput("is_empty", result['include'].length < 1)
-            core.setOutput("build_matrix", JSON.stringify(result));
+        core.setOutput("is_empty", result['include'].length < 1)
+        core.setOutput("build_matrix", JSON.stringify(result));
     } else {
         octokit.repos.compareCommits({owner, repo, base, head})
         .then(data => {
@@ -95,14 +88,12 @@ function buildMatrix(changedDirectories) {
     return {'include': include};
 }
 
-function shouldBuildAll(labels) {
-    for (label of labels) {
-        if (label['name'] === "build-all") {
-            return true
-        }
-    }
-    return false
-}
+function getDirectories(path) {
+    const isDirectory = fs.lstatSync(path).isDirectory()
+    return fs.readdirSync(path, { withFileTypes: true})
+        .filter(directory => fs.lstatSync(path + "/" + directory.name).isDirectory())
+        .map(row => row['name'])
+  }
 
 /***/ }),
 
