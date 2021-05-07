@@ -92,6 +92,7 @@ function getDirectories(path) {
     const isDirectory = fs.lstatSync(path).isDirectory()
     return fs.readdirSync(path, { withFileTypes: true})
         .filter(directory => fs.lstatSync(path + "/" + directory.name).isDirectory())
+        .map(row => row['name'])
   }
 
 /***/ }),
