@@ -11,6 +11,8 @@ jobs:
         uses: ./
         id: generate_build_matrix
         with:
+          build-all: true
+          target-directory: .github
           repo-token: ${{ secrets.MY_GITHUB_TOKEN }}
       - name: Print the output
         run: |
